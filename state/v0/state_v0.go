@@ -5,7 +5,6 @@ import (
 	"errors"
 
 	awsbi "github.com/epiphany-platform/e-structures/awsbi/v0"
-	azbi "github.com/epiphany-platform/e-structures/azbi/v0"
 	azks "github.com/epiphany-platform/e-structures/azks/v0"
 	hi "github.com/epiphany-platform/e-structures/hi/v0"
 	"github.com/epiphany-platform/e-structures/utils/to"
@@ -43,26 +42,6 @@ func (s *HiState) GetConfig() *hi.Config {
 	return s.Config
 }
 
-type AzBIState struct {
-	Status Status       `json:"status" validate:"required,eq=initialized|eq=applied|eq=destroyed"`
-	Config *azbi.Config `json:"config" validate:"omitempty"`
-	Output *azbi.Output `json:"output" validate:"omitempty"`
-}
-
-func (s *AzBIState) GetConfig() *azbi.Config {
-	if s == nil {
-		return nil
-	}
-	return s.Config
-}
-
-func (s *AzBIState) GetOutput() *azbi.Output {
-	if s == nil {
-		return nil
-	}
-	return s.Output
-}
-
 type AzKSState struct {
 	Status Status       `json:"status" validate:"required,eq=initialized|eq=applied|eq=destroyed"`
 	Config *azks.Config `json:"config" validate:"omitempty"`
@@ -83,21 +62,15 @@ func (s *AzKSState) GetOutput() *azks.Output {
 	return s.Output
 }
 
+// TODO change into Modules
+
 type State struct {
 	Kind    *string     `json:"kind" validate:"required,eq=state"`
 	Version *string     `json:"version" validate:"required,version=~0"`
 	Unused  []string    `json:"-"`
-	AzBI    *AzBIState  `json:"azbi" validate:"omitempty"`
 	AzKS    *AzKSState  `json:"azks" validate:"omitempty"`
 	Hi      *HiState    `json:"hi" validate:"omitempty"`
 	AwsBI   *AwsBIState `json:"awsbi" validate:"omitempty"`
-}
-
-func (s *State) GetAzBIState() *AzBIState {
-	if s == nil {
-		return nil
-	}
-	return s.AzBI
 }
 
 func (s *State) GetAzKSState() *AzKSState {

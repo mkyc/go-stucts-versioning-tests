@@ -8,6 +8,6 @@ func IntPtr(i int) *int {
 	return &i
 }
 
-func BooPtr(b bool) *bool {
+func BoolPtr(b bool) *bool {
 	return &b
 }

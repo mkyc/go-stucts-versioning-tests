@@ -102,8 +102,8 @@ func NewConfig() *Config {
 			SubnetName: to.StrPtr("azks"),
 
 			KubernetesVersion:  to.StrPtr("1.18.14"), //TODO ensure that this default version is correct
-			EnableNodePublicIp: to.BooPtr(false),
-			EnableRbac:         to.BooPtr(false),
+			EnableNodePublicIp: to.BoolPtr(false),
+			EnableRbac:         to.BoolPtr(false),
 
 			DefaultNodePool: &DefaultNodePool{
 				Size:        to.IntPtr(2),
@@ -111,11 +111,11 @@ func NewConfig() *Config {
 				Max:         to.IntPtr(5),
 				VmSize:      to.StrPtr("Standard_DS2_v2"),
 				DiskGbSize:  to.IntPtr(36),
-				AutoScaling: to.BooPtr(true),
+				AutoScaling: to.BoolPtr(true),
 				Type:        to.StrPtr("VirtualMachineScaleSets"),
 			},
 			AutoScalerProfile: &AutoScalerProfile{
-				BalanceSimilarNodeGroups:      to.BooPtr(false),
+				BalanceSimilarNodeGroups:      to.BoolPtr(false),
 				MaxGracefulTerminationSec:     to.StrPtr("600"),
 				ScaleDownDelayAfterAdd:        to.StrPtr("10m"),
 				ScaleDownDelayAfterDelete:     to.StrPtr("10s"),

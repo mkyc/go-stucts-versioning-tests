@@ -5,7 +5,6 @@ import (
 	"os"
 
 	awsbi "github.com/epiphany-platform/e-structures/awsbi/v0"
-	azbi "github.com/epiphany-platform/e-structures/azbi/v0"
 	azks "github.com/epiphany-platform/e-structures/azks/v0"
 	hi "github.com/epiphany-platform/e-structures/hi/v0"
 	st "github.com/epiphany-platform/e-structures/state/v0"
@@ -28,9 +27,6 @@ func State(path string) (*st.State, error) {
 		}
 
 		// TODO temporary code because of before mentioned issue
-		if state.GetAzBIState() != nil && state.GetAzBIState().Status == "" {
-			state.AzBI = nil
-		}
 		if state.GetAzKSState() != nil && state.GetAzKSState().Status == "" {
 			state.AzKS = nil
 		}
@@ -44,23 +40,6 @@ func State(path string) (*st.State, error) {
 		// TODO end of temporary code
 
 		return state, nil
-	}
-}
-
-func AzBIConfig(path string) (*azbi.Config, error) {
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		return azbi.NewConfig(), nil
-	} else {
-		config := &azbi.Config{}
-		bytes, err := ioutil.ReadFile(path)
-		if err != nil {
-			return nil, err
-		}
-		err = config.Unmarshal(bytes)
-		if err != nil {
-			return nil, err
-		}
-		return config, nil
 	}
 }
 

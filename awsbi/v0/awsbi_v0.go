@@ -97,7 +97,7 @@ func NewConfig() *Config {
 			Name:                  to.StrPtr("epiphany"),
 			Region:                to.StrPtr("eu-central-1"),
 			NatGatewayCount:       to.IntPtr(1),
-			VirtualPrivateGateway: to.BooPtr(false),
+			VirtualPrivateGateway: to.BoolPtr(false),
 			RsaPublicKeyPath:      to.StrPtr("/shared/vms_rsa.pub"),
 			VpcAddressSpace:       to.StrPtr("10.1.0.0/20"),
 			Subnets: &Subnets{
@@ -150,7 +150,7 @@ func NewConfig() *Config {
 					Name:               to.StrPtr("vm-group0"),
 					VmCount:            to.IntPtr(1),
 					VmSize:             to.StrPtr("t3.medium"),
-					UsePublicIp:        to.BooPtr(false),
+					UsePublicIp:        to.BoolPtr(false),
 					SubnetNames:        []string{"first_private_subnet"},
 					SecurityGroupNames: []string{"default_sg"},
 					VmImage: &VmImage{
